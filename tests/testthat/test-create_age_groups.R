@@ -196,6 +196,21 @@ test_that("NAs, fractional ages, and invalid values are handled correctly", {
   )
 
   expect_error(
+    create_age_groups(c(NaN, NaN, NaN)),
+    "must contain at least one non-missing value"
+  )
+
+  expect_error(
+    create_age_groups(10, breaks = c(NaN, 5, 10)),
+    "cannot contain missing values"
+  )
+
+  expect_error(
+    create_age_groups(10, breaks = c(-1, 5, 10)),
+    "cannot contain negative values"
+  )
+
+  expect_error(
     create_age_groups(10, breaks = 0),
     "must have at least 2 values"
   )
