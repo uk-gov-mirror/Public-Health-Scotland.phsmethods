@@ -108,7 +108,7 @@ test_that("Input validation for as_factor and breaks", {
   )
   expect_error(
     create_age_groups(c(1, 2, 3), breaks = c(0, 5.5, 10)),
-    "must all be whole numbers"
+    "must contain only whole numbers"
   )
   expect_no_error(
     create_age_groups(c(1, 2, 3), breaks = c(0, 5 + 1e-9, 10))
