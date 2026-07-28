@@ -17,8 +17,8 @@
 #' There are options to return custom values e.g. `'M'` and `'F'` or to return
 #' a factor which will have labels `'Male'` and `'Female')`
 #'
-#' @param chi_number a CHI number or a vector of CHI numbers with `character`
-#' class.
+#' @inheritParams chi_check
+#'
 #' @param male_value,female_value optionally supply custom values for Male and
 #' Female. Note that that these must be of the same class.
 #' @param as_factor logical, optionally return as a factor with labels `'Male'`
@@ -50,7 +50,9 @@ sex_from_chi <- function(chi_number,
                          male_value = 1L,
                          female_value = 2L,
                          as_factor = FALSE,
-                         chi_check = TRUE) {
+                         chi_check = TRUE,
+                         check_mod11 = TRUE,
+                         check_mod10 = TRUE) {
   # Do type checking on male/female values
   male_class <- class(male_value)
   female_class <- class(female_value)
@@ -77,7 +79,11 @@ sex_from_chi <- function(chi_number,
   # for invalid CHIs we will return NA for sex
   if (chi_check) {
     # Don't use any CHIs which don't pass the validity check
-    sex_digit[which(chi_check(chi_number) != "Valid CHI")] <- NA_integer_
+    sex_digit[which(chi_check(
+      chi_number,
+      check_mod11 = check_mod11,
+      check_mod10 = check_mod10
+    ) != "Valid CHI")] <- NA_integer_
   }
 
   # Check if the digit is odd or even to determine the sex
