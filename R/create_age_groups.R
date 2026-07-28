@@ -73,7 +73,7 @@ create_age_groups <- function(
       "{.arg as_factor} must be length 1, not {length(as_factor)}."
     )
   }
-  
+
   if (!is.numeric(breaks)) {
     cli::cli_abort(
       "{.arg breaks} must be a {.cls numeric} vector, not a {.cls {class(breaks)}} vector."
