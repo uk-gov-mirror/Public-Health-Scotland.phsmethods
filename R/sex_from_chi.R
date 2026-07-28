@@ -46,13 +46,15 @@
 #' library(dplyr)
 #' df <- tibble(chi = c("0101011237", "0101336489", NA))
 #' df %>% mutate(chi_sex = sex_from_chi(chi))
-sex_from_chi <- function(chi_number,
-                         male_value = 1L,
-                         female_value = 2L,
-                         as_factor = FALSE,
-                         chi_check = TRUE,
-                         check_mod11 = TRUE,
-                         check_mod10 = TRUE) {
+sex_from_chi <- function(
+  chi_number,
+  male_value = 1L,
+  female_value = 2L,
+  as_factor = FALSE,
+  chi_check = TRUE,
+  check_mod11 = TRUE,
+  check_mod10 = TRUE
+) {
   # Do type checking on male/female values
   male_class <- class(male_value)
   female_class <- class(female_value)
@@ -79,11 +81,26 @@ sex_from_chi <- function(chi_number,
   # for invalid CHIs we will return NA for sex
   if (chi_check) {
     # Don't use any CHIs which don't pass the validity check
-    sex_digit[which(chi_check(
+    na_count <- sum(is.na(chi_number))
+    chi_number <- dplyr::if_else(
+      chi_check(
+        chi_number,
+        check_mod11 = check_mod11,
+        check_mod10 = check_mod10
+      ) ==
+        "Valid CHI",
       chi_number,
-      check_mod11 = check_mod11,
-      check_mod10 = check_mod10
-    ) != "Valid CHI")] <- NA_integer_
+      NA_character_
+    )
+    new_na_count <- sum(is.na(chi_number)) - na_count
+
+    if (new_na_count > 0) {
+      cli::cli_alert_warning(
+        ("{format(new_na_count, big.mark = ',')}{cli::qty(new_na_count)} CHI number{?s} {?is/are} invalid and will be given {.val NA} for {?its/their} sex.")
+      )
+    }
+
+    sex_digit[is.na(chi_number)] <- NA_integer_
   }
 
   # Check if the digit is odd or even to determine the sex

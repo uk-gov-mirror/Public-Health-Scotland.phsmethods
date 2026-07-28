@@ -105,20 +105,22 @@ As explained in this [Wikipedia article](https://en.wikipedia.org/wiki/National_
 * The first 6 digits are the patient's Date of Birth in the format `DDMMYY`.
 * Digits 7 and 8 are random.
 * The 9<sup>th</sup> number indicates the patient's sex - odd for male, even for female.
-* The final, 10<sup>th</sup>, digit is a 'check digit' that is calculated from the preceding 9 digits - This helps guard against transcription errors, as it is unlikely that an incorrect number will still produce a valid check digit. Historically, CHIs have used a Mod‑11 check digit; however, from August 2026 new CHI numbers may instead use either a Mod‑11 or a Mod‑10 (Luhn) check digit.
+* The final, 10<sup>th</sup>, digit is a 'check digit' that is calculated from the preceding 9 digits - This helps guard against transcription errors, as it is unlikely that an incorrect number will still produce a valid check digit. Historically, CHIs have used a Modulus-11 (Mod-11) check digit; however, from August 2026 new CHI numbers may instead use either a Mod‑11 or a Modulus-10 (Mod‑10) (Luhn) check digit.
 
 ### Modulus-11 check
+
+While `chi_check()` performs validation of check digits in CHI numbers for you, it may be of interest to understand the details behind how it works. For Mod-11, the steps are:
 
 **Step 1**: Multiply each of the first nine digits of the CHI number by a weighting factor (10:2), i.e. multiply the first digit by 10, multiply the second digit by 9,... , multiply the ninth digit by 2.  
 **Step 2**: Sum up the results from step 1.  
 **Step 3**: Divide the total from step 2 by 11 and derive the remainder.  
 **Step 4**: Subtract the remainder derived in step 3 from 11 (i.e. calculate 11 minus remainder).  
 **Step 5**: If the result from step 4 is 11, set it to zero; otherwise leave the result as it is.  
-**Step 6**: Check that the result from step 5 matches the tenth digit of the CHI number. If it does not match then it the CHI is not valid.
+**Step 6**: Check that the result from step 5 matches the tenth digit of the CHI number. If it does not match then the CHI is not valid.
 
 ### Changes to CHI numbers (August 2026): Inclusion of Modulus-10 check
 
-There is a limit to the number of possible CHI numbers that can be generated for each combination of date of birth and sex. This limit is being reached for CHI numbers that involve dates of birth on 1<sup>st</sup> January for certain years. To increase the limit of possible CHI numbers that can be generated, the current rules (in 2025) which require CHI numbers to have a valid Modulus-11 (Mod-11) check digit are being made less restrictive. Specifically, **from August 2026, changes are being implemented that will allow CHI numbers to be assigned to patients if they have a valid Mod-11 or [Mod-10](https://en.wikipedia.org/wiki/Luhn_algorithm){target="_blank"} check digit**.  This change means that there are a range of scenarios that a CHI number can fit:
+There is a limit to the number of possible CHI numbers that can be generated for each combination of date of birth and sex. This limit is being reached for CHI numbers that involve dates of birth on 1<sup>st</sup> January for certain years. To increase the limit of possible CHI numbers that can be generated, the current rules (in 2025) which require CHI numbers to have a valid Mod-11 check digit are being made less restrictive. Specifically, **from August 2026, changes are being implemented that will allow CHI numbers to be assigned to patients if they have a valid Mod-11 or [Mod-10](https://en.wikipedia.org/wiki/Luhn_algorithm){target="_blank"} check digit**. This change means that there are a range of scenarios that a CHI number can fit:
 
 1. CHI passes Mod-11 but fails Mod-10.
 2. CHI passes Mod-11 and passes Mod-10.
