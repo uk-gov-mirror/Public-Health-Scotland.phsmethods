@@ -108,7 +108,7 @@ file_size()
 #>  3 area_lookup.html       HTML 7 kB 
 #>  4 chi_check.html         HTML 12 kB
 #>  5 chi_pad.html           HTML 8 kB 
-#>  6 create_age_groups.html HTML 10 kB
+#>  6 create_age_groups.html HTML 12 kB
 #>  7 dob_from_chi.html      HTML 13 kB
 #>  8 extract_fin_year.html  HTML 7 kB 
 #>  9 figures                4 kB      

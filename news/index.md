@@ -2,6 +2,13 @@
 
 ## phsmethods (development version)
 
+- [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md)
+  can now create age groups of non-uniform sizes, for example “0-18,
+  19-65, 66-90, 90+” etc. To achieve this we have introduced a new
+  parameter `breaks`. The old parameters `from`, `to` and `by` will
+  continue to work but issue a warning as they will eventually be
+  removed in a future version.
+
 ## phsmethods 1.1.0 (2026-02-24)
 
 CRAN release: 2026-03-30

@@ -6,7 +6,14 @@ appropriate age group.
 ## Usage
 
 ``` r
-create_age_groups(x, from = 0, to = 90, by = 5, as_factor = FALSE)
+create_age_groups(
+  x,
+  from = lifecycle::deprecated(),
+  to = lifecycle::deprecated(),
+  by = lifecycle::deprecated(),
+  as_factor = FALSE,
+  breaks = seq(0, 90, 5)
+)
 ```
 
 ## Arguments
@@ -15,22 +22,21 @@ create_age_groups(x, from = 0, to = 90, by = 5, as_factor = FALSE)
 
   a vector of numeric values
 
-- from:
+- from, to, by:
 
-  the start of the smallest age group. The default is `0`.
-
-- to:
-
-  the end point of the age groups. The default is `90`.
-
-- by:
-
-  the size of the age groups. The default is `5`.
+  **\[deprecated\]** Use `breaks` instead.
 
 - as_factor:
 
   The default behaviour is to return a character vector. Use `TRUE` to
   return a factor vector instead.
+
+- breaks:
+
+  a numeric vector of cut points defining the age groups. The default is
+  `seq(0, 90, 5)`, which corresponds to the [European Standard
+  Population](https://www.opendata.nhs.scot/dataset/standard-populations/resource/edee9731-daf7-4e0d-b525-e4c1469b8f69)
+  age groups.
 
 ## Value
 
@@ -40,18 +46,10 @@ returned instead.
 
 ## Details
 
-The `from`, `to` and `by` values are used to create distinct age groups.
-`from` dictates the starting age of the lowest age group, and `by`
-indicates how wide each group should be. `to` stipulates the cut-off
-point at which all ages equal to or greater than this value should be
-categorised together in a `to+` group. If the specified value of `to` is
-not a multiple of `by`, the value of `to` is rounded down to the nearest
-multiple of `by`.
-
-The default values of `from`, `to` and `by` correspond to the [European
-Standard
-Population](https://www.opendata.nhs.scot/dataset/standard-populations/resource/edee9731-daf7-4e0d-b525-e4c1469b8f69)
-age groups.
+The `breaks` vector defines the cut points for the age groups. The final
+age group will capture all ages equal to or greater than the last value
+in `breaks`, labelled as `last+`. If the cut points are not evenly
+spaced, the labels will reflect the actual width of each group.
 
 ## Examples
 
@@ -60,11 +58,15 @@ age <- c(54, 7, 77, 1, 26, 101)
 
 create_age_groups(age)
 #> [1] "50-54" "5-9"   "75-79" "0-4"   "25-29" "90+"  
-create_age_groups(age, from = 0, to = 80, by = 10)
+create_age_groups(age, breaks = seq(0, 80, 10))
 #> [1] "50-59" "0-9"   "70-79" "0-9"   "20-29" "80+"  
 
-# Final group may start below 'to'
-create_age_groups(age, from = 0, to = 65, by = 10)
+# Non-uniform age groups
+create_age_groups(age, breaks = c(0, 18, 45, 65, 90))
+#> [1] "45-64" "0-17"  "65-89" "0-17"  "18-44" "90+"  
+
+# Final group may start below the last break
+create_age_groups(age, breaks = seq(0, 65, 10))
 #> [1] "50-59" "0-9"   "60+"   "0-9"   "20-29" "60+"  
 
 # To get the output as a factor:
