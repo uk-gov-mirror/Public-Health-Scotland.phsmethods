@@ -30,6 +30,8 @@ in [Public Health Scotland
   extracts Date of Birth (DoB) from the CHI number.
 - [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
   extracts age from the CHI number.
+- [`as_percent()`](https://public-health-scotland.github.io/phsmethods/reference/percent.md)
+  converts vectors of proportions into `<percent>` vectors.
 
 `phsmethods` can be used on both the PHS server and desktop versions of
 RStudio.
