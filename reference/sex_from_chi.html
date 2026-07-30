@@ -55,7 +55,9 @@ is an integer but this can be modified.</p>
 <span>  male_value <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  female_value <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>  as_factor <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  chi_check <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  chi_check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_mod11 <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_mod10 <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -64,8 +66,7 @@ is an integer but this can be modified.</p>
 
 
 <dl><dt id="arg-chi-number">chi_number<a class="anchor" aria-label="anchor" href="#arg-chi-number"></a></dt>
-<dd><p>a CHI number or a vector of CHI numbers with <code>character</code>
-class.</p></dd>
+<dd><p>a CHI number or a vector of CHI numbers with <code>character</code> class.</p></dd>
 
 
 <dt id="arg-male-value-female-value">male_value, female_value<a class="anchor" aria-label="anchor" href="#arg-male-value-female-value"></a></dt>
@@ -83,6 +84,13 @@ and <code>'Female'</code>. Note that this will override any custom values suppli
 <dd><p>logical, optionally skip checking the CHI for validity which
 will be faster but should only be used if you have previously checked the
 CHI(s).</p></dd>
+
+
+<dt id="arg-check-mod-check-mod-">check_mod11, check_mod10<a class="anchor" aria-label="anchor" href="#arg-check-mod-check-mod-"></a></dt>
+<dd><p>Logical values (TRUE or FALSE, default is <code>TRUE</code>). By default, a CHI that passes either the modulo 10 or the modulo 11 check will be considered valid. Historically, CHIs only used modulo 11 for their check digit; however, starting in August 2026, some CHIs will only pass if they meet the modulo 10 criteria.
+Implementation of Mod 10 CHI numbers is scheduled for August 2026.
+From this date, CHI numbers are valid if they pass either a Mod 11 check
+or a Mod 10 check.</p></dd>
 
 </dl></div>
     <div class="section level2">

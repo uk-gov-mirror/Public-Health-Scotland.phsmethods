@@ -7,7 +7,14 @@ ambiguous it will return NA.
 ## Usage
 
 ``` r
-dob_from_chi(chi_number, min_date = NULL, max_date = NULL, chi_check = TRUE)
+dob_from_chi(
+  chi_number,
+  min_date = NULL,
+  max_date = NULL,
+  chi_check = TRUE,
+  check_mod11 = TRUE,
+  check_mod10 = TRUE
+)
 ```
 
 ## Arguments
@@ -29,6 +36,16 @@ dob_from_chi(chi_number, min_date = NULL, max_date = NULL, chi_check = TRUE)
   logical, optionally skip checking the CHI for validity which will be
   faster but should only be used if you have previously checked the
   CHI(s). The default (TRUE) will check the CHI numbers.
+
+- check_mod11, check_mod10:
+
+  Logical values (TRUE or FALSE, default is `TRUE`). By default, a CHI
+  that passes either the modulo 10 or the modulo 11 check will be
+  considered valid. Historically, CHIs only used modulo 11 for their
+  check digit; however, starting in August 2026, some CHIs will only
+  pass if they meet the modulo 10 criteria. Implementation of Mod 10 CHI
+  numbers is scheduled for August 2026. From this date, CHI numbers are
+  valid if they pass either a Mod 11 check or a Mod 10 check.
 
 ## Value
 

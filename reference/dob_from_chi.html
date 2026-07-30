@@ -50,7 +50,14 @@ DoB is ambiguous it will return NA.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dob_from_chi</span><span class="op">(</span><span class="va">chi_number</span>, min_date <span class="op">=</span> <span class="cn">NULL</span>, max_date <span class="op">=</span> <span class="cn">NULL</span>, chi_check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dob_from_chi</span><span class="op">(</span></span>
+<span>  <span class="va">chi_number</span>,</span>
+<span>  min_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  max_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  chi_check <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_mod11 <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_mod10 <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -58,8 +65,7 @@ DoB is ambiguous it will return NA.</p>
 
 
 <dl><dt id="arg-chi-number">chi_number<a class="anchor" aria-label="anchor" href="#arg-chi-number"></a></dt>
-<dd><p>a CHI number or a vector of CHI numbers with <code>character</code>
-class.</p></dd>
+<dd><p>a CHI number or a vector of CHI numbers with <code>character</code> class.</p></dd>
 
 
 <dt id="arg-min-date-max-date">min_date, max_date<a class="anchor" aria-label="anchor" href="#arg-min-date-max-date"></a></dt>
@@ -74,6 +80,13 @@ whilst <code>max_date</code> can be date when an event happens such as discharge
 <dd><p>logical, optionally skip checking the CHI for validity which
 will be faster but should only be used if you have previously checked the
 CHI(s). The default (TRUE) will check the CHI numbers.</p></dd>
+
+
+<dt id="arg-check-mod-check-mod-">check_mod11, check_mod10<a class="anchor" aria-label="anchor" href="#arg-check-mod-check-mod-"></a></dt>
+<dd><p>Logical values (TRUE or FALSE, default is <code>TRUE</code>). By default, a CHI that passes either the modulo 10 or the modulo 11 check will be considered valid. Historically, CHIs only used modulo 11 for their check digit; however, starting in August 2026, some CHIs will only pass if they meet the modulo 10 criteria.
+Implementation of Mod 10 CHI numbers is scheduled for August 2026.
+From this date, CHI numbers are valid if they pass either a Mod 11 check
+or a Mod 10 check.</p></dd>
 
 </dl></div>
     <div class="section level2">

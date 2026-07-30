@@ -12,7 +12,9 @@ sex_from_chi(
   male_value = 1L,
   female_value = 2L,
   as_factor = FALSE,
-  chi_check = TRUE
+  chi_check = TRUE,
+  check_mod11 = TRUE,
+  check_mod10 = TRUE
 )
 ```
 
@@ -38,6 +40,16 @@ sex_from_chi(
   logical, optionally skip checking the CHI for validity which will be
   faster but should only be used if you have previously checked the
   CHI(s).
+
+- check_mod11, check_mod10:
+
+  Logical values (TRUE or FALSE, default is `TRUE`). By default, a CHI
+  that passes either the modulo 10 or the modulo 11 check will be
+  considered valid. Historically, CHIs only used modulo 11 for their
+  check digit; however, starting in August 2026, some CHIs will only
+  pass if they meet the modulo 10 criteria. Implementation of Mod 10 CHI
+  numbers is scheduled for August 2026. From this date, CHI numbers are
+  valid if they pass either a Mod 11 check or a Mod 10 check.
 
 ## Value
 

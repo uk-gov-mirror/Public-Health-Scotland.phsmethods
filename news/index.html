@@ -39,8 +39,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="phsmethods-development-version">phsmethods (development version)<a class="anchor" aria-label="anchor" href="#phsmethods-development-version"></a></h2>
-<ul><li>
-<code><a href="../reference/create_age_groups.html">create_age_groups()</a></code> can now create age groups of non-uniform sizes, for example “0-18, 19-65, 66-90, 90+” etc. To achieve this we have introduced a new parameter <code>breaks</code>. The old parameters <code>from</code>, <code>to</code> and <code>by</code> will continue to work but issue a warning as they will eventually be removed in a future version.</li>
+<ul><li><p><code><a href="../reference/chi_check.html">chi_check()</a></code> now supports both Mod-11 and Mod-10 (Luhn) check digits, reflecting planned changes to CHI number allocation from August 2026. New <code>check_mod11</code> and <code>check_mod10</code> arguments allow validation to be restricted to a specific algorithm if required.</p></li>
+<li><p><code><a href="../reference/create_age_groups.html">create_age_groups()</a></code> can now create age groups of non-uniform sizes, for example “0-18, 19-65, 66-90, 90+” etc. To achieve this we have introduced a new parameter <code>breaks</code>. The old parameters <code>from</code>, <code>to</code> and <code>by</code> will continue to work but issue a warning as they will eventually be removed in a future version.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="phsmethods-110-2026-02-24">phsmethods 1.1.0 (2026-02-24)<a class="anchor" aria-label="anchor" href="#phsmethods-110-2026-02-24"></a></h2><p class="text-muted">CRAN release: 2026-03-30</p>

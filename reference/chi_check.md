@@ -8,14 +8,24 @@ why.
 ## Usage
 
 ``` r
-chi_check(x)
+chi_check(chi_number, check_mod11 = TRUE, check_mod10 = TRUE)
 ```
 
 ## Arguments
 
-- x:
+- chi_number:
 
   a CHI number or a vector of CHI numbers with `character` class.
+
+- check_mod11, check_mod10:
+
+  Logical values (TRUE or FALSE, default is `TRUE`). By default, a CHI
+  that passes either the modulo 10 or the modulo 11 check will be
+  considered valid. Historically, CHIs only used modulo 11 for their
+  check digit; however, starting in August 2026, some CHIs will only
+  pass if they meet the modulo 10 criteria. Implementation of Mod 10 CHI
+  numbers is scheduled for August 2026. From this date, CHI numbers are
+  valid if they pass either a Mod 11 check or a Mod 10 check.
 
 ## Value
 
@@ -73,9 +83,15 @@ whether the answer to each of the following criteria is `Yes`:
 
 ``` r
 chi_check("0101011237")
+#> By default, `chi_check()` now returns CHI numbers as valid if they pass either
+#> a Mod11 or Mod10 check
+#> Previously `chi_check()` would only return CHI numbers as valid if they pass a
+#> Mod11 check - for this behaviour, please use `chi_check(chi_number, check_mod10
+#> = FALSE)`
+#> This message is displayed once per session.
 #> [1] "Valid CHI"
 chi_check(c("0101201234", "3201201234"))
-#> [1] "Invalid checksum" "Invalid date"    
+#> [1] "Valid CHI"    "Invalid date"
 
 library(dplyr)
 df <- tibble(chi = c(

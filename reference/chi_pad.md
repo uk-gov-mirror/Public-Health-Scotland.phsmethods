@@ -7,12 +7,12 @@ comprised of nine numeric digits remain unchanged.
 ## Usage
 
 ``` r
-chi_pad(x)
+chi_pad(chi_number)
 ```
 
 ## Arguments
 
-- x:
+- chi_number:
 
   a CHI number or a vector of CHI numbers with `character` class.
 

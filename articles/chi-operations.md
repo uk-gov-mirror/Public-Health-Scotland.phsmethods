@@ -26,10 +26,15 @@ chi_numbers <- c(
 library(phsmethods)
 
 chi_check(chi_numbers)
-#> [1] "Valid CHI"                    "Invalid date"                
-#> [3] "Too few characters"           "Too many characters"         
-#> [5] "Invalid checksum"             "Invalid character(s) present"
-#> [7] "Missing (NA)"                 "Missing (Blank)"
+#> By default, `chi_check()` now returns CHI numbers as valid if they pass either
+#> a Mod11 or Mod10 check
+#> Previously `chi_check()` would only return CHI numbers as valid if they pass a
+#> Mod11 check - for this behaviour, please use `chi_check(chi_number, check_mod10
+#> = FALSE)`
+#> This message is displayed once per session.
+#> [1] "Valid CHI"           "Invalid date"        "Too few characters" 
+#> [4] "Too many characters" "Invalid checksum"    "Too many characters"
+#> [7] "Missing (NA)"        "Missing (Blank)"
 ```
 
 ### Cleaning up bad CHI numbers
@@ -40,16 +45,18 @@ Usually, we will have the CHI as a variable in some data.
 
 library(dplyr)
 
-data <- tibble(chi = c(
-  "0211165794",
-  "9999999999",
-  "402070763",
-  "00402070763",
-  "0101010000",
-  "Missing CHI",
-  NA,
-  ""
-))
+data <- tibble(
+  chi = c(
+    "0211165794",
+    "9999999999",
+    "402070763",
+    "00402070763",
+    "0101010000",
+    "Missing CHI",
+    NA,
+    ""
+  )
+)
 ```
 
 It looks like one of the CHI numbers ‘402070763’ might have just lost a
@@ -67,15 +74,15 @@ checked_data <- fixed_data %>%
 
 checked_data
 #> # A tibble: 8 × 2
-#>   chi           valid_chi                   
-#>   <chr>         <chr>                       
-#> 1 "0211165794"  Valid CHI                   
-#> 2 "9999999999"  Invalid date                
-#> 3 "0402070763"  Valid CHI                   
-#> 4 "00402070763" Too many characters         
-#> 5 "0101010000"  Invalid checksum            
-#> 6 "Missing CHI" Invalid character(s) present
-#> 7  NA           Missing (NA)                
+#>   chi           valid_chi          
+#>   <chr>         <chr>              
+#> 1 "0211165794"  Valid CHI          
+#> 2 "9999999999"  Invalid date       
+#> 3 "0402070763"  Valid CHI          
+#> 4 "00402070763" Too many characters
+#> 5 "0101010000"  Invalid checksum   
+#> 6 "Missing CHI" Too many characters
+#> 7  NA           Missing (NA)       
 #> 8 ""            Missing (Blank)
 ```
 
@@ -86,16 +93,15 @@ rather than seeing them per CHI.
 
 fixed_data %>%
   count(valid_chi = chi_check(chi), sort = TRUE)
-#> # A tibble: 7 × 2
-#>   valid_chi                        n
-#>   <chr>                        <int>
-#> 1 Valid CHI                        2
-#> 2 Invalid character(s) present     1
-#> 3 Invalid checksum                 1
-#> 4 Invalid date                     1
-#> 5 Missing (Blank)                  1
-#> 6 Missing (NA)                     1
-#> 7 Too many characters              1
+#> # A tibble: 6 × 2
+#>   valid_chi               n
+#>   <chr>               <int>
+#> 1 Too many characters     2
+#> 2 Valid CHI               2
+#> 3 Invalid checksum        1
+#> 4 Invalid date            1
+#> 5 Missing (Blank)         1
+#> 6 Missing (NA)            1
 ```
 
 Now we have this knowledge we have a few options. Which option we take
@@ -142,17 +148,121 @@ variables are either completely missing or incomplete.
 Once we have checked and (if necessary) padded the CHI numbers, we can
 then try and extract some information from them.
 
-#### The structure of a CHI number
+### The structure of a CHI number
 
 As explained in this [Wikipedia
 article](https://en.wikipedia.org/wiki/National_Health_Service_Central_Register#Community_Health_Index)
-a CHI number is constructed as follows: \* The first 6 digits are the
-patient’s Date of Birth in the format `DDMMYY`. \* Digits 7 and 8 are
-random. \* The 9^(th) number indicates the patient’s sex - odd for male,
-even for female. \* The final, 10^(th), digit is a (Modulus-11) ‘check
-digit’ - This helps guard against transcription errors, for example, if
-someone makes a typo it is very unlikely that the check digit will still
-be valid.
+a CHI number is constructed as follows:
+
+- The first 6 digits are the patient’s Date of Birth in the format
+  `DDMMYY`.
+- Digits 7 and 8 are random.
+- The 9^(th) number indicates the patient’s sex - odd for male, even for
+  female.
+- The final, 10^(th), digit is a ‘check digit’ that is calculated from
+  the preceding 9 digits - This helps guard against transcription
+  errors, as it is unlikely that an incorrect number will still produce
+  a valid check digit. Historically, CHIs have used a Modulus-11
+  (Mod-11) check digit; however, from August 2026 new CHI numbers may
+  instead use either a Mod‑11 or a Modulus-10 (Mod‑10) (Luhn) check
+  digit.
+
+### Modulus-11 check
+
+While
+[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+performs validation of check digits in CHI numbers for you, it may be of
+interest to understand the details behind how it works. For Mod-11, the
+steps are:
+
+**Step 1**: Multiply each of the first nine digits of the CHI number by
+a weighting factor (10:2), i.e. multiply the first digit by 10, multiply
+the second digit by 9,… , multiply the ninth digit by 2.  
+**Step 2**: Sum up the results from step 1.  
+**Step 3**: Divide the total from step 2 by 11 and derive the
+remainder.  
+**Step 4**: Subtract the remainder derived in step 3 from 11
+(i.e. calculate 11 minus remainder).  
+**Step 5**: If the result from step 4 is 11, set it to zero; otherwise
+leave the result as it is.  
+**Step 6**: Check that the result from step 5 matches the tenth digit of
+the CHI number. If it does not match then the CHI is not valid.
+
+### Changes to CHI numbers (August 2026): Inclusion of Modulus-10 check
+
+There is a limit to the number of possible CHI numbers that can be
+generated for each combination of date of birth and sex. This limit is
+being reached for CHI numbers that involve dates of birth on 1^(st)
+January for certain years. To increase the limit of possible CHI numbers
+that can be generated, the current rules (in 2025) which require CHI
+numbers to have a valid Mod-11 check digit are being made less
+restrictive. Specifically, **from August 2026, changes are being
+implemented that will allow CHI numbers to be assigned to patients if
+they have a valid Mod-11 or
+[Mod-10](https://en.wikipedia.org/wiki/Luhn_algorithm) check digit**.
+This change means that there are a range of scenarios that a CHI number
+can fit:
+
+1.  CHI passes Mod-11 but fails Mod-10.
+2.  CHI passes Mod-11 and passes Mod-10.
+3.  CHI fails Mod-11 but passes Mod-10.
+4.  CHI fails Mod-11 and fails Mod-10.
+
+For scenarios 1, 2, and 4, the results of the CHI check will remain the
+same as before. However, permitting scenario 3 will result in more CHI
+numbers passing the CHI check. It is important to note that prior to the
+implementation date that allows Mod-10 to be used for CHI numbers, no
+individuals will have been assigned a CHI number that passes Mod-10 but
+fails Mod-11.
+
+By default,
+[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+will output as `"Valid CHI"` if CHI numbers pass either a Mod-11 or
+Mod-10 check. Therefore, the default setting for
+[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+can allow some CHI numbers to be returned as a valid CHI when they are
+not. For instance, this can happen if you know a dataset only contains
+CHI numbers assigned to patients prior to the Mod-10 implementation
+date. In this case, you can use `chi_check(chi, check_mod10 = FALSE)` to
+apply a CHI check that only allows CHI numbers that pass a Mod-11 check
+to be returned as valid.
+
+If a dataset contains data where it is possible for patients to have
+been assigned a CHI number which passes Mod-10 (i.e. patient was first
+registered after the Mod-10 implementation and had an affected date of
+birth), then a small error rate may occur when applying the CHI check
+function with default settings. While this error rate is very small, one
+approach to reduce this error rate is to apply the CHI check
+conditionally. For example, a Mod-10/Mod-11 check can be applied only to
+CHI numbers that have dates of birth starting on 1^(st) January and the
+Mod-11 check can be used otherwise. If you want to apply a check
+following that logic,
+[`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) or
+[`case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
+can be used.
+
+``` r
+
+fixed_data %>%
+  mutate(
+    chi_valid = if_else(
+      stringr::str_detect(chi, "^0101"),
+      chi_check(chi),
+      chi_check(chi, check_mod10 = FALSE)
+    )
+  )
+#> # A tibble: 8 × 2
+#>   chi           chi_valid          
+#>   <chr>         <chr>              
+#> 1 "0211165794"  Valid CHI          
+#> 2 "9999999999"  Invalid date       
+#> 3 "0402070763"  Valid CHI          
+#> 4 "00402070763" Too many characters
+#> 5 "0101010000"  Invalid checksum   
+#> 6 "Missing CHI" Too many characters
+#> 7  NA           NA                 
+#> 8 ""            Missing (Blank)
+```
 
 ### Extracting sex from CHI
 
@@ -160,7 +270,10 @@ With
 [`sex_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/sex_from_chi.md)
 we can extract the infer and extract the patient’s sex. By default, the
 function will first check the CHI for validity and will return `NA` if a
-CHI is invalid.
+CHI is invalid. Note that from August 2026, this check will allow
+options to check CHI against Mod-11 and/or Mod-10 (the same applies when
+checking CHIs within the functions to extract date of birth or age from
+CHI).
 
 If you have already checked the CHI in a previous step it can be useful
 to use `chi_check = FALSE` as this will be faster.
@@ -168,15 +281,22 @@ to use `chi_check = FALSE` as this will be faster.
 ``` r
 
 data <- tibble(
-  chi = c("0101011237", "0211165794", "0402070763", "0101336489", "1904851231", "2902960018")
+  chi = c(
+    "0101011237",
+    "0211165794",
+    "0402070763",
+    "0101336489",
+    "1904851231",
+    "2902960018"
+  )
 )
 
 # Confirm all of the CHIs are valid
-count(data, chi_check(chi))
+count(data, chi_check(chi, check_mod10 = FALSE))
 #> # A tibble: 1 × 2
-#>   `chi_check(chi)`     n
-#>   <chr>            <int>
-#> 1 Valid CHI            6
+#>   `chi_check(chi, check_mod10 = FALSE)`     n
+#>   <chr>                                 <int>
+#> 1 Valid CHI                                 6
 
 data_sex <- data %>%
   mutate(sex = sex_from_chi(chi, chi_check = FALSE))
@@ -232,7 +352,7 @@ data_sex %>%
   theme_minimal()
 ```
 
-![](chi-operations_files/figure-html/unnamed-chunk-9-1.png)
+![](chi-operations_files/figure-html/unnamed-chunk-10-1.png)
 
 ### Extracting Date of Birth from CHI
 
@@ -303,11 +423,13 @@ data %>%
 
 # Expect no one born before 1999-12-31 i.e. 16 years before our data started.
 data %>%
-  mutate(dob = dob_from_chi(
-    chi,
-    max_date = as.Date("2015-12-31"),
-    min_date = as.Date("2015-12-31") - lubridate::years(16)
-  ))
+  mutate(
+    dob = dob_from_chi(
+      chi,
+      max_date = as.Date("2015-12-31"),
+      min_date = as.Date("2015-12-31") - lubridate::years(16)
+    )
+  )
 #> ! 4 CHI numbers produced ambiguous dates and will be given "NA" for their Dates
 #>   of Birth.
 #> ✔ Try different values for `min_date` and/or `max_date`.
@@ -329,14 +451,16 @@ date.
 ``` r
 
 data <- data %>%
-  mutate(event_date = as.Date(c(
-    "2015-01-01",
-    "2014-01-01",
-    "2013-01-01",
-    "2012-01-01",
-    "2011-01-01",
-    "2010-01-01"
-  )))
+  mutate(
+    event_date = as.Date(c(
+      "2015-01-01",
+      "2014-01-01",
+      "2013-01-01",
+      "2012-01-01",
+      "2011-01-01",
+      "2010-01-01"
+    ))
+  )
 
 # Using the event date as the maximum date
 data %>%
@@ -356,11 +480,13 @@ data %>%
 
 # Setting a 'fixed' minimum date as well as using the event date
 data_dob <- data %>%
-  mutate(dob = dob_from_chi(
-    chi,
-    max_date = event_date,
-    min_date = as.Date("1915-01-01")
-  ))
+  mutate(
+    dob = dob_from_chi(
+      chi,
+      max_date = event_date,
+      min_date = as.Date("1915-01-01")
+    )
+  )
 
 data_dob
 #> # A tibble: 6 × 3
@@ -462,12 +588,14 @@ data %>%
 #> 6 2902960018 2010-01-01    13
 
 data %>%
-  mutate(age = age_from_chi(
-    chi,
-    ref_date = event_date,
-    min_age = 60,
-    max_age = 120
-  ))
+  mutate(
+    age = age_from_chi(
+      chi,
+      ref_date = event_date,
+      min_age = 60,
+      max_age = 120
+    )
+  )
 #> ! 2 CHI numbers produced ambiguous dates and will be given "NA" for their Dates
 #>   of Birth.
 #> ✔ Try different values for `min_age` and/or `max_age`.
@@ -482,11 +610,13 @@ data %>%
 #> 6 2902960018 2010-01-01    NA
 
 data %>%
-  mutate(age = age_from_chi(
-    chi,
-    min_age = 60,
-    max_age = 120
-  ))
+  mutate(
+    age = age_from_chi(
+      chi,
+      min_age = 60,
+      max_age = 120
+    )
+  )
 #> ! 3 CHI numbers produced ambiguous dates and will be given "NA" for their Dates
 #>   of Birth.
 #> ✔ Try different values for `min_age` and/or `max_age`.
