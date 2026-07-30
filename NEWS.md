@@ -1,9 +1,15 @@
 # phsmethods (development version)
 
+- `chi_check()` now supports both Mod-11 and Mod-10 (Luhn) check digits, 
+reflecting planned changes to CHI number allocation from August 2026. 
+New `check_mod11` and `check_mod10` arguments allow validation to be restricted 
+to a specific algorithm if required.
+
 - `create_age_groups()` can now create age groups of non-uniform sizes, for 
 example "0-18, 19-65, 66-90, 90+" etc. To achieve this we have introduced a new 
 parameter `breaks`. The old parameters `from`, `to` and `by` will continue to 
 work but issue a warning as they will eventually be removed in a future version.
+
 
 # phsmethods 1.1.0 (2026-02-24)
 
