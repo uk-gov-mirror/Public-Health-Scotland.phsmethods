@@ -1,4 +1,4 @@
-# phsmethods 1.2.0 (2026-08-01)
+# phsmethods 1.2.0 (2026-07-31)
 
 - `chi_check()` now supports both Mod-11 and Mod-10 (Luhn) check digits, 
 reflecting planned changes to CHI number allocation from August 2026. 
