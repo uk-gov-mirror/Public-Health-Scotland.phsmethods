@@ -1,12 +1,20 @@
 # Changelog
 
-## phsmethods (development version)
+## phsmethods 1.2.0 (2026-07-31)
+
+CRAN release: 2026-07-31
 
 - [`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
   now supports both Mod-11 and Mod-10 (Luhn) check digits, reflecting
   planned changes to CHI number allocation from August 2026. New
   `check_mod11` and `check_mod10` arguments allow validation to be
   restricted to a specific algorithm if required.
+
+- [`sex_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/sex_from_chi.md),
+  [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
+  and
+  [`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+  now also include the new `check_mod11` and `check_mod10` arguments.
 
 - [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md)
   can now create age groups of non-uniform sizes, for example “0-18,

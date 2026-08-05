@@ -313,10 +313,8 @@ data_sex
 ```
 
 By default sex will be returned as an integer with ‘1’ representing
-‘Male’ and ‘2’ representing ‘Female’, this is consistent with the
-[coding of
-sex](https://www.ndc.scot.nhs.uk/Dictionary-A-Z/Definitions/index.asp?Search=S&ID=1277&Title=Sex)
-in other PHS datasets.
+‘Male’ and ‘2’ representing ‘Female’, this is consistent with the coding
+of sex in other PHS datasets.
 
 We can have sex returned as a factor using `as_factor = TRUE`, which by
 default will have levels of ‘1’ and ‘2’ and labels of ‘Male’ and
