@@ -1,3 +1,5 @@
+# phsmethods (development version)
+
 # phsmethods 1.2.0 (2026-07-31)
 
 - `chi_check()` now supports both Mod-11 and Mod-10 (Luhn) check digits, 
