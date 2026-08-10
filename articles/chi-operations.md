@@ -157,8 +157,16 @@ a CHI number is constructed as follows:
 - The first 6 digits are the patient’s Date of Birth in the format
   `DDMMYY`.
 - Digits 7 and 8 are random.
-- The 9^(th) number indicates the patient’s sex - odd for male, even for
-  female.
+- The 9^(th) number indicates the patient’s sex (or gender) - odd for
+  male, even for female. In most cases what is recorded on CHI
+  represents biological sex (usually determined at birth). There is a
+  provision for individuals to have what is recorded on CHI altered, so
+  in this case what is then recorded can be regarded as gender. In this
+  case, a new CHI number would be generated and the ninth digit will
+  reflect this gender. Equally individuals may now have a gender that
+  differs from their biological sex but their CHI information still
+  reflects their biological sex. This would happen if individuals have
+  not requested for their CHI to be changed.
 - The final, 10^(th), digit is a ‘check digit’ that is calculated from
   the preceding 9 digits - This helps guard against transcription
   errors, as it is unlikely that an incorrect number will still produce
