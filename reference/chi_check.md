@@ -66,7 +66,7 @@ be stored with `numeric` class in R. This is because leading zeros in
 numeric values are silently dropped, a practice not exclusive to R. For
 this reason, `chi_check` accepts input values of `character` class only.
 A leading zero can be added to a nine-digit CHI number using
-[`chi_pad()`](https://public-health-scotland.github.io/phsmethods/reference/chi_pad.md).
+[`chi_pad()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_pad.md).
 
 `chi_check` assesses whether an entered CHI number is valid by checking
 whether the answer to each of the following criteria is `Yes`:

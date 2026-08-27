@@ -37,7 +37,7 @@ numeric values are silently dropped, a practice not exclusive to R. For
 this reason, `chi_pad` accepts input values of `character` class only,
 and returns values of the same class. It does not assess the validity of
 a CHI number - please see
-[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+[`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
 for that.
 
 ## Examples

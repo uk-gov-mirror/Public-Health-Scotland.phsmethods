@@ -13,7 +13,7 @@ Useful links:
 
 - <https://github.com/Public-Health-Scotland/phsmethods>
 
-- <https://public-health-scotland.github.io/phsmethods/>
+- <https://code.publichealthscotland.scot/phsmethods>
 
 - Report bugs at
   <https://github.com/Public-Health-Scotland/phsmethods/issues>

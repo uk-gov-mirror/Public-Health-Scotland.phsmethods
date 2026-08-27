@@ -3,7 +3,7 @@
 `age_from_chi` takes a CHI number or a vector of CHI numbers and returns
 the age as implied by the CHI number(s). If the Date of Birth (DoB) is
 ambiguous it will return NA. It uses
-[`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md).
+[`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md).
 
 ## Usage
 

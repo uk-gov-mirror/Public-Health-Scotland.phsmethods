@@ -6,19 +6,19 @@
 
 CRAN release: 2026-07-31
 
-- [`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+- [`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
   now supports both Mod-11 and Mod-10 (Luhn) check digits, reflecting
   planned changes to CHI number allocation from August 2026. New
   `check_mod11` and `check_mod10` arguments allow validation to be
   restricted to a specific algorithm if required.
 
-- [`sex_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/sex_from_chi.md),
-  [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
+- [`sex_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/sex_from_chi.md),
+  [`age_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/age_from_chi.md)
   and
-  [`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+  [`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)
   now also include the new `check_mod11` and `check_mod10` arguments.
 
-- [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md)
+- [`create_age_groups()`](https://code.publichealthscotland.scot/phsmethods/reference/create_age_groups.md)
   can now create age groups of non-uniform sizes, for example “0-18,
   19-65, 66-90, 90+” etc. To achieve this we have introduced a new
   parameter `breaks`. The old parameters `from`, `to` and `by` will
@@ -62,7 +62,7 @@ as_percent(x)
 ## [1] "25%" "50%" "75%"
 ```
 
-[`as_percent()`](https://public-health-scotland.github.io/phsmethods/reference/percent.md)
+[`as_percent()`](https://code.publichealthscotland.scot/phsmethods/reference/percent.md)
 keeps the proportions as-is and simply prints them as percentages.
 
 ``` r
@@ -98,30 +98,30 @@ has been created to help introduce and explain this new feature.
 
 ### Lifecycle changes
 
-- [`file_size()`](https://public-health-scotland.github.io/phsmethods/reference/file_size.md)
+- [`file_size()`](https://code.publichealthscotland.scot/phsmethods/reference/file_size.md)
   has been deprecated as we believe it is no longer relevant
   ([\#11](https://github.com/Public-Health-Scotland/phsmethods/issues/11)).
   Please let us know if you still have a use for it, otherwise it will
   be removed in a future version.
-- [`age_calculate()`](https://public-health-scotland.github.io/phsmethods/reference/age_calculate.md)
+- [`age_calculate()`](https://code.publichealthscotland.scot/phsmethods/reference/age_calculate.md)
   is now more robust in uncommon situations such as leap years, or if a
   date is supplied as a date time. Previously, it would sometimes give
   incorrect values for these types of edge cases.
 - Three functions that were renamed and deprecated in [phsmethods 0.2.1
   (2022-02-11)](#phsmethods-021-2022-02-11) have now been removed:
   `postcode()` is now
-  [`format_postcode()`](https://public-health-scotland.github.io/phsmethods/reference/format_postcode.md);
+  [`format_postcode()`](https://code.publichealthscotland.scot/phsmethods/reference/format_postcode.md);
   `age_group()` is now
-  [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md)
+  [`create_age_groups()`](https://code.publichealthscotland.scot/phsmethods/reference/create_age_groups.md)
   and `fin_year()` is now
-  [`extract_fin_year()`](https://public-health-scotland.github.io/phsmethods/reference/extract_fin_year.md).
+  [`extract_fin_year()`](https://code.publichealthscotland.scot/phsmethods/reference/extract_fin_year.md).
 
 ## phsmethods 1.0.2 (2024-01-05)
 
 CRAN release: 2024-01-08
 
 - No user-facing changes. Fix some tests for
-  [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
+  [`age_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/age_from_chi.md)
   due to a helper function `expected_age()` caused the tests fail when
   the new year comes. It has been replaced with a fixed reference date.
 
@@ -130,7 +130,7 @@ CRAN release: 2024-01-08
 CRAN release: 2023-11-28
 
 - Fix a bug in
-  [`extract_fin_year()`](https://public-health-scotland.github.io/phsmethods/reference/extract_fin_year.md)
+  [`extract_fin_year()`](https://code.publichealthscotland.scot/phsmethods/reference/extract_fin_year.md)
   to make sure financial years are displayed correctly from 1999/20 to
   2008/09.
 
@@ -148,15 +148,15 @@ CRAN release: 2023-11-03
 - The [{gdata}](https://github.com/r-gregmisc/gdata) import has been
   dropped and replaced with [{scales}](https://scales.r-lib.org/).
 
-- [`extract_fin_year()`](https://public-health-scotland.github.io/phsmethods/reference/extract_fin_year.md)
+- [`extract_fin_year()`](https://code.publichealthscotland.scot/phsmethods/reference/extract_fin_year.md)
   is now much faster and will use less memory, especially for smaller
   vectors (1 to 1,000).
 
-- [`format_postcode()`](https://public-health-scotland.github.io/phsmethods/reference/format_postcode.md)
+- [`format_postcode()`](https://code.publichealthscotland.scot/phsmethods/reference/format_postcode.md)
   is now faster and also gains a `quiet` parameter, the default value is
   `FALSE` but setting it to `TRUE` will skip some of the checks and
   messages, this is useful when using
-  [`format_postcode()`](https://public-health-scotland.github.io/phsmethods/reference/format_postcode.md)
+  [`format_postcode()`](https://code.publichealthscotland.scot/phsmethods/reference/format_postcode.md)
   to ‘clean-up’ and format a vector of postcodes, rather than wanting to
   check them. Because of the skipped checks `quiet = TRUE` should also
   run faster.
@@ -166,7 +166,7 @@ CRAN release: 2023-11-03
 ## phsmethods 0.2.2 (2022-11-14)
 
 - Improved
-  [`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+  [`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
   to make it more efficient and run faster.
 
 - Improved the “Using phsmethods” section in the README to be shorter
@@ -180,20 +180,20 @@ CRAN release: 2023-11-03
 ## phsmethods 0.2.1 (2022-02-11)
 
 - Three functions renamed to improve code clarity: `postcode()` to
-  [`format_postcode()`](https://public-health-scotland.github.io/phsmethods/reference/format_postcode.md);
+  [`format_postcode()`](https://code.publichealthscotland.scot/phsmethods/reference/format_postcode.md);
   `age_group()` to
-  [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md);
+  [`create_age_groups()`](https://code.publichealthscotland.scot/phsmethods/reference/create_age_groups.md);
   `fin_year()` to
-  [`extract_fin_year()`](https://public-health-scotland.github.io/phsmethods/reference/extract_fin_year.md).
+  [`extract_fin_year()`](https://code.publichealthscotland.scot/phsmethods/reference/extract_fin_year.md).
   The old functions will still work but will produce a warning. After a
   reasonable amount of time, they will be removed completely.
 
 - New functions added:
-  [`age_calculate()`](https://public-health-scotland.github.io/phsmethods/reference/age_calculate.md)([\#65](https://github.com/Public-Health-Scotland/phsmethods/issues/65),
+  [`age_calculate()`](https://code.publichealthscotland.scot/phsmethods/reference/age_calculate.md)([\#65](https://github.com/Public-Health-Scotland/phsmethods/issues/65),
   [@Nic-chr](https://github.com/Nic-Chr));
-  [`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)([\#42](https://github.com/Public-Health-Scotland/phsmethods/issues/42),
+  [`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)([\#42](https://github.com/Public-Health-Scotland/phsmethods/issues/42),
   [@Moohan](https://github.com/Moohan)); and
-  [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)([\#42](https://github.com/Public-Health-Scotland/phsmethods/issues/42),
+  [`age_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/age_from_chi.md)([\#42](https://github.com/Public-Health-Scotland/phsmethods/issues/42),
   [@Moohan](https://github.com/Moohan))
 
 - Change the output for `chi_check` so that empty string (““) reports as
@@ -205,11 +205,11 @@ CRAN release: 2023-11-03
 - New functions added:
   `age_group()`([\#23](https://github.com/Public-Health-Scotland/phsmethods/issues/23),
   [@chrisdeans](https://github.com/chrisdeans));
-  [`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)([\#30](https://github.com/Public-Health-Scotland/phsmethods/issues/30),
+  [`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)([\#30](https://github.com/Public-Health-Scotland/phsmethods/issues/30),
   [@graemegowans](https://github.com/graemegowans));
-  [`chi_pad()`](https://public-health-scotland.github.io/phsmethods/reference/chi_pad.md)([\#30](https://github.com/Public-Health-Scotland/phsmethods/issues/30),
+  [`chi_pad()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_pad.md)([\#30](https://github.com/Public-Health-Scotland/phsmethods/issues/30),
   [@graemegowans](https://github.com/graemegowans)); and
-  [`match_area()`](https://public-health-scotland.github.io/phsmethods/reference/match_area.md)([\#13](https://github.com/Public-Health-Scotland/phsmethods/issues/13),
+  [`match_area()`](https://code.publichealthscotland.scot/phsmethods/reference/match_area.md)([\#13](https://github.com/Public-Health-Scotland/phsmethods/issues/13),
   [@jvillacampa](https://github.com/jvillacampa)).
 
 - The first argument of `postcode()` is now `x`, as opposed to `string`.
@@ -225,13 +225,13 @@ CRAN release: 2023-11-03
 
 ## phsmethods 0.1.1 (2020-02-10)
 
-- [`file_size()`](https://public-health-scotland.github.io/phsmethods/reference/file_size.md),
+- [`file_size()`](https://code.publichealthscotland.scot/phsmethods/reference/file_size.md),
   `fin_year()`,
-  [`qtr()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_end()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_next()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+  [`qtr()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_end()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_next()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   and
-  [`qtr_prev()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+  [`qtr_prev()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   now use `inherits(x, "y")` instead of `class(x) == "y"` to check
   class. The reasoning is explained in this [blogpost by Martin
   Maechler](https://developer.r-project.org/Blog/public/2019/11/09/when-you-think-class.-think-again/index.html).
@@ -245,11 +245,11 @@ CRAN release: 2023-11-03
 ## phsmethods 0.1.0 (2020-01-24)
 
 - Initial package release.
-- [`file_size()`](https://public-health-scotland.github.io/phsmethods/reference/file_size.md),
+- [`file_size()`](https://code.publichealthscotland.scot/phsmethods/reference/file_size.md),
   `fin_year()`, `postcode()`,
-  [`qtr()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_end()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_next()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+  [`qtr()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_end()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_next()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   and
-  [`qtr_prev()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+  [`qtr_prev()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   functions added.

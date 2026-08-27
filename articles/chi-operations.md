@@ -5,7 +5,7 @@
 The first thing you should do when working with CHI numbers of unknown
 quality is to check their validity. phsmethods provides a function to
 easily do this:
-[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md) -
+[`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md) -
 This function expects a character vector (1 or more), it will then
 return a value for each CHI number letting you know if it’s valid, and
 if it isn’t what the issue is.
@@ -62,7 +62,7 @@ data <- tibble(
 It looks like one of the CHI numbers ‘402070763’ might have just lost a
 leading zero, this is a common occurrence if the data has passed through
 Excel at some point. We can fix this specific issue with
-[`chi_pad()`](https://public-health-scotland.github.io/phsmethods/reference/chi_pad.md).
+[`chi_pad()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_pad.md).
 
 ``` r
 
@@ -178,7 +178,7 @@ a CHI number is constructed as follows:
 ### Modulus-11 check
 
 While
-[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+[`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
 performs validation of check digits in CHI numbers for you, it may be of
 interest to understand the details behind how it works. For Mod-11, the
 steps are:
@@ -224,10 +224,10 @@ individuals will have been assigned a CHI number that passes Mod-10 but
 fails Mod-11.
 
 By default,
-[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+[`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
 will output as `"Valid CHI"` if CHI numbers pass either a Mod-11 or
 Mod-10 check. Therefore, the default setting for
-[`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+[`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
 can allow some CHI numbers to be returned as a valid CHI when they are
 not. For instance, this can happen if you know a dataset only contains
 CHI numbers assigned to patients prior to the Mod-10 implementation
@@ -275,7 +275,7 @@ fixed_data %>%
 ### Extracting sex from CHI
 
 With
-[`sex_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/sex_from_chi.md)
+[`sex_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/sex_from_chi.md)
 we can extract the infer and extract the patient’s sex. By default, the
 function will first check the CHI for validity and will return `NA` if a
 CHI is invalid. Note that from August 2026, this check will allow
@@ -371,7 +371,7 @@ for example in 2023 we know that any CHI numbers of the form ‘DDMM24’
 etc. must mean 1924 since it can’t be 2024.
 
 The function
-[`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+[`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)
 will try to extract the Date of Birth and will return `NA` if the date
 is ambiguous.
 
@@ -509,17 +509,17 @@ data_dob
 ### Extracting age from CHI
 
 The function
-[`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
+[`age_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/age_from_chi.md)
 provides a simpler interface for just extracting a patient’s age from
 the CHI number. In the background, it uses
-[`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+[`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)
 but allows you to specify `min_age` and `max_age`, which are usually
 conceptually simpler than trying to work out dates. We do lose some
 amount of fine control here though, so it will sometimes be necessary to
 use
-[`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+[`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)
 and then
-[`age_calculate()`](https://public-health-scotland.github.io/phsmethods/reference/age_calculate.md).
+[`age_calculate()`](https://code.publichealthscotland.scot/phsmethods/reference/age_calculate.md).
 
 Note that age is calculated at *today’s* date unless otherwise specified
 with the `ref_date` argument.

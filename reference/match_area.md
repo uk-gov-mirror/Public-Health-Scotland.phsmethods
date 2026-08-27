@@ -2,7 +2,7 @@
 
 `match_area` takes a geography code or vector of geography codes. It
 matches the input to the corresponding value in the
-[`area_lookup()`](https://public-health-scotland.github.io/phsmethods/reference/area_lookup.md)
+[`area_lookup()`](https://code.publichealthscotland.scot/phsmethods/reference/area_lookup.md)
 dataset and returns the corresponding area name.
 
 ## Usage
@@ -22,7 +22,7 @@ match_area(x)
 Each geography code within Scotland is unique, and consequently
 `match_area` returns a single area name for each input value. Any input
 value without a corresponding value in the
-[`area_lookup()`](https://public-health-scotland.github.io/phsmethods/reference/area_lookup.md)
+[`area_lookup()`](https://code.publichealthscotland.scot/phsmethods/reference/area_lookup.md)
 dataset will return an NA output value.
 
 ## Details
@@ -50,10 +50,10 @@ Settlements (S20) and Scotland.
 
 `match_area` returns a non-NA value only when an exact match is present
 between the input value and the corresponding variable in the
-[`area_lookup()`](https://public-health-scotland.github.io/phsmethods/reference/area_lookup.md)
+[`area_lookup()`](https://code.publichealthscotland.scot/phsmethods/reference/area_lookup.md)
 dataset. These exact matches are sensitive to both case and spacing. It
 is advised to inspect
-[`area_lookup()`](https://public-health-scotland.github.io/phsmethods/reference/area_lookup.md)
+[`area_lookup()`](https://code.publichealthscotland.scot/phsmethods/reference/area_lookup.md)
 in the case of unexpected results, as these may be explained by subtle
 differences in transcription between the input value and the
 corresponding value in the lookup dataset.

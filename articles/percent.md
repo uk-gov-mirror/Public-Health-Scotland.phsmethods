@@ -31,7 +31,7 @@ reproducible code.
 ## Creating percentages
 
 The primary function for converting to percentages is
-[`as_percent()`](https://public-health-scotland.github.io/phsmethods/reference/percent.md).
+[`as_percent()`](https://code.publichealthscotland.scot/phsmethods/reference/percent.md).
 This converts a `<numeric>` vector to a `<percent>` vector, handling the
 formatting and rounding when needed, i.e printing or converting to a
 character vector.

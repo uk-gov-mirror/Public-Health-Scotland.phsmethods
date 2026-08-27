@@ -4,33 +4,33 @@
 in [Public Health Scotland
 (PHS)](https://www.publichealthscotland.scot/):
 
-- [`create_age_groups()`](https://public-health-scotland.github.io/phsmethods/reference/create_age_groups.md)
+- [`create_age_groups()`](https://code.publichealthscotland.scot/phsmethods/reference/create_age_groups.md)
   categorises ages into groups.
-- [`chi_check()`](https://public-health-scotland.github.io/phsmethods/reference/chi_check.md)
+- [`chi_check()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_check.md)
   assesses the validity of a CHI number.
-- [`chi_pad()`](https://public-health-scotland.github.io/phsmethods/reference/chi_pad.md)
+- [`chi_pad()`](https://code.publichealthscotland.scot/phsmethods/reference/chi_pad.md)
   adds a leading zero to nine-digit CHI numbers.
-- [`sex_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/sex_from_chi.md)
+- [`sex_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/sex_from_chi.md)
   extracts the sex of a person from a CHI number.
-- [`extract_fin_year()`](https://public-health-scotland.github.io/phsmethods/reference/extract_fin_year.md)
+- [`extract_fin_year()`](https://code.publichealthscotland.scot/phsmethods/reference/extract_fin_year.md)
   assigns a date to a financial year in the format `YYYY/YY`.
-- [`match_area()`](https://public-health-scotland.github.io/phsmethods/reference/match_area.md)
+- [`match_area()`](https://code.publichealthscotland.scot/phsmethods/reference/match_area.md)
   converts geography codes into area names.
-- [`format_postcode()`](https://public-health-scotland.github.io/phsmethods/reference/format_postcode.md)
+- [`format_postcode()`](https://code.publichealthscotland.scot/phsmethods/reference/format_postcode.md)
   formats improperly recorded postcodes.
-- [`qtr()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_end()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md),
-  [`qtr_next()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+- [`qtr()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_end()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md),
+  [`qtr_next()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   and
-  [`qtr_prev()`](https://public-health-scotland.github.io/phsmethods/reference/qtr.md)
+  [`qtr_prev()`](https://code.publichealthscotland.scot/phsmethods/reference/qtr.md)
   assign a date to a quarter.
-- [`age_calculate()`](https://public-health-scotland.github.io/phsmethods/reference/age_calculate.md)
+- [`age_calculate()`](https://code.publichealthscotland.scot/phsmethods/reference/age_calculate.md)
   calculates age between two dates.
-- [`dob_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/dob_from_chi.md)
+- [`dob_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/dob_from_chi.md)
   extracts Date of Birth (DoB) from the CHI number.
-- [`age_from_chi()`](https://public-health-scotland.github.io/phsmethods/reference/age_from_chi.md)
+- [`age_from_chi()`](https://code.publichealthscotland.scot/phsmethods/reference/age_from_chi.md)
   extracts age from the CHI number.
-- [`as_percent()`](https://public-health-scotland.github.io/phsmethods/reference/percent.md)
+- [`as_percent()`](https://code.publichealthscotland.scot/phsmethods/reference/percent.md)
   converts vectors of proportions into `<percent>` vectors.
 
 `phsmethods` can be used on both the PHS server and desktop versions of
@@ -92,7 +92,7 @@ To see the documentation for any `phsmethods`’ functions, type
 
 You can access the full list of functions and their help pages on
 [Reference page of pkgdown
-website](https://public-health-scotland.github.io/phsmethods/reference/index.html).
+website](https://code.publichealthscotland.scot/phsmethods/reference/index.html).
 You will be able to see some examples of each function.
 
 There is also a very useful [PHS Methods on-line training
@@ -143,7 +143,7 @@ and code commentary. For more information on security when using git and
 GitHub, and on using git and GitHub for version control more generally,
 please see the [Transforming Publishing
 Programme](https://www.isdscotland.org/Products-and-Services/Transforming-Publishing-Programme/)’s
-[Git guide](https://Public-Health-Scotland.github.io/git-guide/) and
+[Git guide](https://code.publichealthscotland.scot/git-guide/) and
 [GitHub
 guidance](https://github.com/Public-Health-Scotland/GitHub-guidance).
 

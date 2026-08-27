@@ -2,7 +2,7 @@
 
 A dataset containing Scotland's geography codes and associated area
 names. It is used within
-[`match_area()`](https://public-health-scotland.github.io/phsmethods/reference/match_area.md).
+[`match_area()`](https://code.publichealthscotland.scot/phsmethods/reference/match_area.md).
 
 ## Usage
 
