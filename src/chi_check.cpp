@@ -1,4 +1,6 @@
 
+#if __cplusplus >= 202002L
+
 // ----- Check validity of Community Health Index (CHI) numbers -----
 // Authors: Nick Christofides, Alan Yeung & phsmethods collaborators
 
@@ -54,3 +56,5 @@ r_vector<r_str> cpp_chi_check(const r_vector<r_str>& x, bool check_mod11, bool c
     return phsmethods::chi_check(chi, check_mod11, check_mod10);
   }, x);
 }
+
+#endif

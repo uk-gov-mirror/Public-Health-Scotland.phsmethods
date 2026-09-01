@@ -1,3 +1,6 @@
+
+#if __cplusplus >= 202002L
+
 #include "phsmethods.h"
 #include <string_view>
 
@@ -83,3 +86,5 @@ bool valid_checksum(std::string_view s, bool check_mod11, bool check_mod10) {
 } // namespace impl
 
 }
+
+#endif

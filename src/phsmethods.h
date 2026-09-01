@@ -1,5 +1,7 @@
 #pragma once
 
+#if __cplusplus >= 202002L
+
 #include <cppally.hpp>
 #include <string_view>
 
@@ -33,3 +35,5 @@ inline constexpr bool all_valid_digits(std::string_view s) noexcept {
 cppally::r_str chi_check(cppally::r_str_view x, bool check_mod11, bool check_mod10);
 
 }
+
+#endif

@@ -1,4 +1,6 @@
 
+#if __cplusplus >= 202002L
+
 #include "phsmethods.h"
 #include <string_view>
 
@@ -65,3 +67,5 @@ r_vector<r_date> cpp_dob_from_chi(
 
   }, x, min_date, max_date);
 }
+
+#endif
